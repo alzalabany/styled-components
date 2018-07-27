@@ -60,6 +60,11 @@ const flatten = (
           }
 
           /* Either execute or defer the function */
+          if (typeof rule === 'string' && rule[0]==='$') {
+            const res = rule.splice(1)
+            rule = (props) => props[res]
+          }
+  
           if (typeof rule === 'function') {
             if (executionContext) {
               const res = rule(executionContext)
